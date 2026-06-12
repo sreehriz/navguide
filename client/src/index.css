@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-mint: #1ab8b5;
+  --color-sand: #e5c158;
+  --color-coral: #f43f5e;
+  --color-cream: #1e293b;
+}
+
 /* ─── Design Tokens ──────────────────────────────────────────────────── */
 :root {
   --c-bg:        #FFFFFF;
