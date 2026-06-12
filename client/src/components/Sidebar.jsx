@@ -52,7 +52,7 @@ export function Sidebar() {
           {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
             <NavLink key={to} to={to}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-700 transition-all border ${
+                `flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-700 transition-all border whitespace-nowrap ${
                   isActive
                     ? 'bg-[rgba(139,223,221,0.15)] text-[#1AB8B5] border-[rgba(139,223,221,0.35)]'
                     : 'text-gray-500 hover:text-gray-800 hover:bg-black/[0.02] border-transparent'
