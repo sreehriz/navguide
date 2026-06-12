@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "node --watch src/index.js"
+    "dev": "node --watch src/index.js",
+    "db:users": "node src/view_users.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

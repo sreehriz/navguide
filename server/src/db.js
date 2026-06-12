@@ -71,6 +71,34 @@ export async function initDb() {
   } catch (error) {
     console.error('[DB] Error during seeding:', error.message);
   }
+
+  // Seed default users if empty
+  try {
+    const userCount = await database.get('SELECT COUNT(*) as count FROM users');
+    if (userCount && userCount.count === 0) {
+      console.log('[DB] Users table is empty. Seeding default users...');
+      await database.exec(`
+        INSERT OR IGNORE INTO users (
+          id, name, email, password_hash, academic_level, academic_marks, academic_stream, career_goal, college_type, budget, location
+        ) VALUES (
+          'default-student-id', 'Nav Student', 'student@navguide.com', '$2a$10$K6a3WaI9Al6Vq2Q4cWKBoOeRgTXsInGbvgxQUugIIvZeawEufYqtu', 'PUC', 95.5, 'Science', 'Software Engineer', 'Government', 150000, 'Bangalore'
+        ), (
+          'sohan-pinto-id', 'Sohan Vikas Pinto', 'sohanpinto11@gmail.com', '$2a$10$K6a3WaI9Al6Vq2Q4cWKBoOeRgTXsInGbvgxQUugIIvZeawEufYqtu', 'PUC', 90.0, 'Science', 'AI Developer', 'Private', 300000, 'Mangalore'
+        );
+
+        INSERT OR IGNORE INTO interests (user_id, interest_id) VALUES
+        ('default-student-id', 'coding'),
+        ('default-student-id', 'ai'),
+        ('sohan-pinto-id', 'coding'),
+        ('sohan-pinto-id', 'ai');
+      `);
+      console.log('[DB] Default users seeded successfully.');
+    } else {
+      console.log('[DB] Users table already contains data.');
+    }
+  } catch (error) {
+    console.error('[DB] Error during user seeding:', error.message);
+  }
   
   return database;
 }

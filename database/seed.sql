@@ -27,3 +27,16 @@ INSERT INTO engineering_colleges (id, college_name, location, college_type, naac
 (24,'Canara Group of Institutions','Mangalore','Private','NA','BE Computer Science',700000,600000,3.5),
 (25,'Quad AI School of Management and Technology','Mangalore','Private','NA','BTech AIML',950000,1000000,3.8),
 (26,'Srinivas School of Engineering','Mukka','Private','NA','BE Computer Science',550000,700000,3.6);
+
+-- Seed default users
+INSERT OR IGNORE INTO users (id, name, email, password_hash, academic_level, academic_marks, academic_stream, career_goal, college_type, budget, location) VALUES
+('default-student-id', 'Nav Student', 'student@navguide.com', '$2a$10$K6a3WaI9Al6Vq2Q4cWKBoOeRgTXsInGbvgxQUugIIvZeawEufYqtu', 'PUC', 95.5, 'Science', 'Software Engineer', 'Government', 150000, 'Bangalore'),
+('sohan-pinto-id', 'Sohan Vikas Pinto', 'sohanpinto11@gmail.com', '$2a$10$K6a3WaI9Al6Vq2Q4cWKBoOeRgTXsInGbvgxQUugIIvZeawEufYqtu', 'PUC', 90.0, 'Science', 'AI Developer', 'Private', 300000, 'Mangalore');
+
+-- Seed default user interests
+INSERT OR IGNORE INTO interests (user_id, interest_id) VALUES
+('default-student-id', 'coding'),
+('default-student-id', 'ai'),
+('sohan-pinto-id', 'coding'),
+('sohan-pinto-id', 'ai');
+
