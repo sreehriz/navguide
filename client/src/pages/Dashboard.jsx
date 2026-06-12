@@ -344,7 +344,16 @@ export function Dashboard() {
                 <div key={c.id} className="flex items-center space-x-3 p-3 bg-white/5 rounded-xl border border-white/5 hover:border-mint/20 transition-all text-left">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1">
-                      <p className="text-xs font-bold text-cream truncate font-poppins">{c.college_name}</p>
+                      <p
+                        onClick={() => {
+                          const url = c.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(c.college_name)}+official+website`;
+                          window.open(url, '_blank', 'noopener,noreferrer');
+                        }}
+                        className="text-xs font-bold text-cream truncate font-poppins cursor-pointer hover:text-mint hover:underline"
+                        title={c.official_website_url ? "Visit Official Website" : "Search Official Website"}
+                      >
+                        {c.college_name}
+                      </p>
                       <button
                         onClick={() => {
                           const url = c.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(c.college_name)}+official+website`;
@@ -433,7 +442,16 @@ export function Dashboard() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1">
-                      <p className="text-xs font-bold text-cream truncate font-poppins">{c.college_name}</p>
+                      <p
+                        onClick={() => {
+                          const url = c.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(c.college_name)}+official+website`;
+                          window.open(url, '_blank', 'noopener,noreferrer');
+                        }}
+                        className="text-xs font-bold text-cream truncate font-poppins cursor-pointer hover:text-mint hover:underline"
+                        title={c.official_website_url ? "Visit Official Website" : "Search Official Website"}
+                      >
+                        {c.college_name}
+                      </p>
                       <button
                         onClick={() => {
                           const url = c.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(c.college_name)}+official+website`;

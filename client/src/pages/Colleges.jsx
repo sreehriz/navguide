@@ -478,7 +478,14 @@ export function Colleges() {
 
                     <div className="flex flex-col gap-1">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <h3 className="text-lg font-bold text-cream group-hover:text-mint transition-colors font-poppins">
+                        <h3
+                          onClick={() => {
+                            const url = college.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(college.college_name)}+official+website`;
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="text-lg font-bold text-cream hover:text-mint transition-colors font-poppins cursor-pointer hover:underline"
+                          title={college.official_website_url ? "Visit Official Website" : "Search Official Website"}
+                        >
                           {college.college_name}
                         </h3>
                         <button
@@ -654,7 +661,16 @@ export function Colleges() {
                   <div key={college.id} className="space-y-4 bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 relative">
                     <div className="flex items-start justify-between gap-1.5 min-h-[44px]">
                       <div className="flex items-center gap-1 flex-wrap pr-1">
-                        <h4 className="font-bold text-slate-800 line-clamp-2 leading-tight font-poppins text-xs">{college.college_name}</h4>
+                        <h4
+                          onClick={() => {
+                            const url = college.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(college.college_name)}+official+website`;
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="font-bold text-slate-800 line-clamp-2 leading-tight font-poppins text-xs cursor-pointer hover:text-mint hover:underline"
+                          title={college.official_website_url ? "Visit Official Website" : "Search Official Website"}
+                        >
+                          {college.college_name}
+                        </h4>
                         <button
                           onClick={() => {
                             const url = college.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(college.college_name)}+official+website`;
