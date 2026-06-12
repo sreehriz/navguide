@@ -597,19 +597,19 @@ export function Colleges() {
 
       {/* College Comparison Floating Table Drawer */}
       {comparedIds.length >= 2 && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-zinc-950/95 border-t border-white/10 shadow-2xl p-5 md:p-6 backdrop-blur-xl animate-in slide-in-from-bottom duration-300">
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 border-t border-slate-200 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] p-5 md:p-6 backdrop-blur-xl animate-in slide-in-from-bottom duration-300">
           <div className="max-w-6xl mx-auto space-y-4 text-left">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-bold text-cream flex items-center gap-2 font-poppins">
+                <h3 className="text-sm font-bold text-slate-800 flex items-center gap-2 font-poppins">
                   <TrendingUp size={16} className="text-mint" />
                   <span>College Comparison ({comparedIds.length}/3)</span>
                 </h3>
-                <p className="text-[10px] text-cream/40 font-inter">Side-by-side comparison of fees, placements, courses, and locations</p>
+                <p className="text-[10px] text-slate-500 font-inter">Side-by-side comparison of fees, placements, courses, and locations</p>
               </div>
               <button
                 onClick={() => setComparedIds([])}
-                className="text-xs text-coral hover:underline font-bold cursor-pointer"
+                className="text-xs text-rose-500 hover:text-rose-600 font-bold hover:underline cursor-pointer"
               >
                 Clear comparison
               </button>
@@ -619,7 +619,7 @@ export function Colleges() {
             <div className="grid grid-cols-4 gap-4 text-xs">
               
               {/* Labels Row */}
-              <div className="space-y-4 font-bold text-cream/40 pt-14 font-poppins">
+              <div className="space-y-4 font-bold text-slate-400 pt-14 font-poppins">
                 <div>Type</div>
                 <div>Location</div>
                 <div>NAAC Grade</div>
@@ -636,24 +636,24 @@ export function Colleges() {
                 const annualFee = college.total_fees / 4
 
                 return (
-                  <div key={college.id} className="space-y-4 bg-white/5 border border-white/5 rounded-xl p-3.5 relative">
+                  <div key={college.id} className="space-y-4 bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 relative">
                     <button
                       onClick={() => setComparedIds(comparedIds.filter(cid => cid !== college.id))}
-                      className="absolute top-2 right-2 text-cream/30 hover:text-coral font-bold text-[10px]"
+                      className="absolute top-2 right-2 text-slate-400 hover:text-rose-500 font-bold text-[10px]"
                     >
                       Remove
                     </button>
                     
                     <div className="h-10 flex flex-col justify-end">
-                      <h4 className="font-bold text-cream line-clamp-2 leading-tight font-poppins">{college.college_name}</h4>
+                      <h4 className="font-bold text-slate-800 line-clamp-2 leading-tight font-poppins">{college.college_name}</h4>
                     </div>
 
-                    <div className="font-inter">{college.college_type}</div>
-                    <div className="truncate font-inter">{college.location}</div>
-                    <div className="font-inter">{college.naac_grade}</div>
-                    <div className="truncate text-sand font-inter">{college.top_course}</div>
-                    <div className="font-bold text-cream font-inter">{formatCurrency(annualFee)}</div>
-                    <div className="font-bold text-mint font-inter">{formatCurrency(college.highest_package)}</div>
+                    <div className="font-inter text-slate-600">{college.college_type}</div>
+                    <div className="truncate font-inter text-slate-600">{college.location}</div>
+                    <div className="font-inter text-slate-600">{college.naac_grade}</div>
+                    <div className="truncate text-sand font-bold font-inter">{college.top_course}</div>
+                    <div className="font-bold text-slate-800 font-inter">{formatCurrency(annualFee)}</div>
+                    <div className="font-bold text-emerald-600 font-inter">{formatCurrency(college.highest_package)}</div>
                     <div className="flex items-center gap-1 font-bold text-sand font-poppins">
                       <Star size={10} className="fill-sand text-sand" />
                       <span>{college.rating}</span>
@@ -664,7 +664,7 @@ export function Colleges() {
 
               {/* Empty state slot */}
               {comparedIds.length < 3 && (
-                <div className="border border-dashed border-white/10 rounded-xl flex items-center justify-center text-cream/20 italic p-4 text-center font-inter">
+                <div className="border border-dashed border-slate-200 bg-slate-50/50 rounded-xl flex items-center justify-center text-slate-400 italic p-4 text-center font-inter">
                   Select another college to compare
                 </div>
               )}
