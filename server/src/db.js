@@ -178,52 +178,72 @@ export async function initDb() {
     }
   }
 
-  // Seed default users if empty
+  // Seed default users if empty or missing
   try {
-    if (mockDb.data.users.length === 0) {
-      console.log('[DB] Users table is empty. Seeding default users...');
-      mockDb.data.users.push(
-        {
-          id: 'default-student-id',
-          name: 'Nav Student',
-          email: 'student@navguide.com',
-          password_hash: '$2a$10$K6a3WaI9Al6Vq2Q4cWKBoOeRgTXsInGbvgxQUugIIvZeawEufYqtu',
-          academic_level: 'PUC',
-          academic_marks: 95.5,
-          academic_stream: 'Science',
-          career_goal: 'Software Engineer',
-          college_type: 'Government',
-          budget: 150000,
-          location: 'Bangalore',
-          created_at: new Date().toISOString()
-        },
-        {
-          id: 'sohan-pinto-id',
-          name: 'Sohan Vikas Pinto',
-          email: 'sohanpinto11@gmail.com',
-          password_hash: '$2a$10$K6a3WaI9Al6Vq2Q4cWKBoOeRgTXsInGbvgxQUugIIvZeawEufYqtu',
-          academic_level: 'PUC',
-          academic_marks: 90.0,
-          academic_stream: 'Science',
-          career_goal: 'AI Developer',
-          college_type: 'Private',
-          budget: 300000,
-          location: 'Mangalore',
-          created_at: new Date().toISOString()
-        }
-      );
+    const defaultUsers = [
+      {
+        id: 'default-student-id',
+        name: 'Nav Student',
+        email: 'student@navguide.com',
+        password_hash: '$2a$10$K6a3WaI9Al6Vq2Q4cWKBoOeRgTXsInGbvgxQUugIIvZeawEufYqtu',
+        academic_level: 'PUC',
+        academic_marks: 95.5,
+        academic_stream: 'Science',
+        career_goal: 'Software Engineer',
+        college_type: 'Government',
+        budget: 150000,
+        location: 'Bangalore'
+      },
+      {
+        id: 'sohan-pinto-id',
+        name: 'Sohan Vikas Pinto',
+        email: 'sohanpinto11@gmail.com',
+        password_hash: '$2a$10$K6a3WaI9Al6Vq2Q4cWKBoOeRgTXsInGbvgxQUugIIvZeawEufYqtu',
+        academic_level: 'PUC',
+        academic_marks: 90.0,
+        academic_stream: 'Science',
+        career_goal: 'AI Developer',
+        college_type: 'Private',
+        budget: 300000,
+        location: 'Mangalore'
+      },
+      {
+        id: 'sreehari-user-id',
+        name: 'Sreehari',
+        email: 'sreehari2005@gmail.com',
+        password_hash: '$2a$10$4dQObpfV/SOjWNSfP1XxtuVGwrUQKO1CnsfBp71Iauq0tyynBv3x2',
+        academic_level: 'PUC',
+        academic_marks: 95.0,
+        academic_stream: 'Science',
+        career_goal: 'AI Specialist',
+        college_type: 'Government',
+        budget: 200000,
+        location: 'Bangalore'
+      }
+    ];
 
-      mockDb.data.interests.push(
-        { user_id: 'default-student-id', interest_id: 'coding' },
-        { user_id: 'default-student-id', interest_id: 'ai' },
-        { user_id: 'sohan-pinto-id', interest_id: 'coding' },
-        { user_id: 'sohan-pinto-id', interest_id: 'ai' }
-      );
-      
+    let modified = false;
+    for (const u of defaultUsers) {
+      if (!mockDb.data.users.some(existing => existing.email.toLowerCase() === u.email.toLowerCase())) {
+        console.log(`[DB] Seeding missing user: ${u.email}`);
+        mockDb.data.users.push({
+          ...u,
+          created_at: new Date().toISOString()
+        });
+        
+        mockDb.data.interests.push(
+          { user_id: u.id, interest_id: 'coding' },
+          { user_id: u.id, interest_id: 'ai' }
+        );
+        modified = true;
+      }
+    }
+
+    if (modified) {
       mockDb.save();
       console.log('[DB] Default users seeded successfully.');
     } else {
-      console.log('[DB] Users table already contains data.');
+      console.log('[DB] Default users already present.');
     }
   } catch (error) {
     console.error('[DB] Error during user seeding:', error.message);

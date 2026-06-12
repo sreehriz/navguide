@@ -35,7 +35,6 @@ export function AuthProvider({ children }) {
 
   // Action: Login
   const login = async (email, password) => {
-    setLoading(true)
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
@@ -53,14 +52,11 @@ export function AuthProvider({ children }) {
       return data.user
     } catch (error) {
       throw error
-    } finally {
-      setLoading(false)
     }
   }
 
   // Action: Signup
   const signup = async (signupData) => {
-    setLoading(true)
     try {
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
@@ -93,14 +89,11 @@ export function AuthProvider({ children }) {
       return data.user
     } catch (error) {
       throw error
-    } finally {
-      setLoading(false)
     }
   }
 
   // Action: Update Profile
   const updateProfile = async (updatedData) => {
-    setLoading(true)
     try {
       const token = localStorage.getItem('navguide_token')
       const res = await fetch('/api/user/profile', {
@@ -119,8 +112,6 @@ export function AuthProvider({ children }) {
       return data
     } catch (error) {
       throw error
-    } finally {
-      setLoading(false)
     }
   }
 
