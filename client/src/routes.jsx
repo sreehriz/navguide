@@ -12,6 +12,7 @@ import Colleges  from './pages/Colleges'
 import Decision  from './pages/Decision'
 import Profile   from './pages/Profile'
 import Chat      from './pages/Chat'
+import Community from './pages/Community'
 
 /* ─── Loading screen ─────────────────────────────────────────────────────── */
 function LoadingScreen({ label = 'Loading NavGuide…' }) {
@@ -81,6 +82,7 @@ export function AppRoutes() {
       <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       <Route path="/colleges"  element={<ProtectedRoute><Colleges /></ProtectedRoute>} />
       <Route path="/decision"  element={<ProtectedRoute><Decision /></ProtectedRoute>} />
+      <Route path="/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
       <Route path="/profile"   element={<ProtectedRoute><Profile /></ProtectedRoute>} />
       <Route path="/chat"      element={<ProtectedRoute><Chat /></ProtectedRoute>} />
       <Route path="*"          element={<Navigate to="/" replace />} />

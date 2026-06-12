@@ -328,4 +328,275 @@ Student says: "${message}"`;
   }
 });
 
+// === BOOKMARKS ===
+router.get('/bookmarks', authMiddleware, async (req, res) => {
+  try {
+    const db = await getDb();
+    const bookmarks = db.data.bookmarks.filter(b => b.user_id === req.user.id);
+    res.json(bookmarks);
+  } catch (err) {
+    console.error('Bookmarks fetch error:', err);
+    res.status(500).json({ error: 'Server error fetching bookmarks.' });
+  }
+});
+
+router.post('/bookmarks', authMiddleware, async (req, res) => {
+  const { collegeId } = req.body;
+  if (collegeId === undefined) {
+    return res.status(400).json({ error: 'College ID is required.' });
+  }
+  try {
+    const db = await getDb();
+    const index = db.data.bookmarks.findIndex(b => b.user_id === req.user.id && b.college_id === Number(collegeId));
+    if (index !== -1) {
+      db.data.bookmarks.splice(index, 1);
+    } else {
+      db.data.bookmarks.push({
+        id: crypto.randomUUID(),
+        user_id: req.user.id,
+        college_id: Number(collegeId),
+        created_at: new Date().toISOString()
+      });
+    }
+    db.save();
+    const bookmarks = db.data.bookmarks.filter(b => b.user_id === req.user.id);
+    res.json(bookmarks);
+  } catch (err) {
+    console.error('Bookmarks toggle error:', err);
+    res.status(500).json({ error: 'Server error toggling bookmark.' });
+  }
+});
+
+// === NOTIFICATIONS ===
+router.get('/notifications', authMiddleware, async (req, res) => {
+  try {
+    const db = await getDb();
+    let userPrefs = db.data.notification_preferences.find(p => p.user_id === req.user.id);
+    if (!userPrefs) {
+      userPrefs = { user_id: req.user.id, exam_alerts: true, deadline_alerts: true };
+      db.data.notification_preferences.push(userPrefs);
+      db.save();
+    }
+
+    const list = db.data.notifications.filter(notif => {
+      if (notif.type === 'exam' && !userPrefs.exam_alerts) return false;
+      if (notif.type === 'deadline' && !userPrefs.deadline_alerts) return false;
+      return true;
+    });
+
+    res.json({
+      notifications: list,
+      preferences: userPrefs
+    });
+  } catch (err) {
+    console.error('Notifications fetch error:', err);
+    res.status(500).json({ error: 'Server error fetching notifications.' });
+  }
+});
+
+router.put('/notifications/preferences', authMiddleware, async (req, res) => {
+  const { exam_alerts, deadline_alerts } = req.body;
+  try {
+    const db = await getDb();
+    let userPrefs = db.data.notification_preferences.find(p => p.user_id === req.user.id);
+    if (!userPrefs) {
+      userPrefs = { user_id: req.user.id, exam_alerts: true, deadline_alerts: true };
+      db.data.notification_preferences.push(userPrefs);
+    }
+    if (exam_alerts !== undefined) userPrefs.exam_alerts = !!exam_alerts;
+    if (deadline_alerts !== undefined) userPrefs.deadline_alerts = !!deadline_alerts;
+    db.save();
+    res.json(userPrefs);
+  } catch (err) {
+    console.error('Notifications preferences update error:', err);
+    res.status(500).json({ error: 'Server error updating preferences.' });
+  }
+});
+
+router.put('/notifications/read', authMiddleware, async (req, res) => {
+  const { id } = req.body;
+  try {
+    const db = await getDb();
+    if (id) {
+      const notif = db.data.notifications.find(n => n.id === id);
+      if (notif) notif.read = true;
+    } else {
+      db.data.notifications.forEach(n => {
+        n.read = true;
+      });
+    }
+    db.save();
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Notifications read error:', err);
+    res.status(500).json({ error: 'Server error marking read.' });
+  }
+});
+
+// === REVIEWS ===
+router.get('/colleges/:id/reviews', async (req, res) => {
+  const collegeId = Number(req.params.id);
+  try {
+    const db = await getDb();
+    const reviews = db.data.reviews.filter(r => r.college_id === collegeId);
+    res.json(reviews);
+  } catch (err) {
+    console.error('Reviews fetch error:', err);
+    res.status(500).json({ error: 'Server error fetching reviews.' });
+  }
+});
+
+router.post('/colleges/:id/reviews', authMiddleware, async (req, res) => {
+  const collegeId = Number(req.params.id);
+  const { rating, comment } = req.body;
+  if (!rating) {
+    return res.status(400).json({ error: 'Rating is required.' });
+  }
+  try {
+    const db = await getDb();
+    const user = await db.get('SELECT * FROM users WHERE id = ?', [req.user.id]);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    const newReview = {
+      id: crypto.randomUUID(),
+      user_id: req.user.id,
+      username: user.name,
+      college_id: collegeId,
+      rating: parseFloat(rating),
+      comment: comment || '',
+      date: new Date().toISOString()
+    };
+
+    db.data.reviews.push(newReview);
+
+    const collegeReviews = db.data.reviews.filter(r => r.college_id === collegeId);
+    const avgRating = collegeReviews.reduce((acc, curr) => acc + curr.rating, 0) / collegeReviews.length;
+    
+    const college = db.data.engineering_colleges.find(c => c.id === collegeId);
+    if (college) {
+      college.rating = parseFloat(avgRating.toFixed(1));
+    }
+
+    db.save();
+    res.status(201).json(newReview);
+  } catch (err) {
+    console.error('Review submit error:', err);
+    res.status(500).json({ error: 'Server error submitting review.' });
+  }
+});
+
+// === COMMUNITY FORUM ===
+router.get('/community/threads', async (req, res) => {
+  try {
+    const db = await getDb();
+    const threads = [...db.data.discussions].sort((a, b) => new Date(b.date) - new Date(a.date));
+    res.json(threads);
+  } catch (err) {
+    console.error('Community threads fetch error:', err);
+    res.status(500).json({ error: 'Server error fetching threads.' });
+  }
+});
+
+router.post('/community/threads', authMiddleware, async (req, res) => {
+  const { title, content, category } = req.body;
+  if (!title || !content || !category) {
+    return res.status(400).json({ error: 'Title, content, and category are required.' });
+  }
+  try {
+    const db = await getDb();
+    const user = await db.get('SELECT * FROM users WHERE id = ?', [req.user.id]);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    const newThread = {
+      id: crypto.randomUUID(),
+      user_id: req.user.id,
+      username: user.name,
+      title,
+      content,
+      category,
+      date: new Date().toISOString()
+    };
+
+    db.data.discussions.push(newThread);
+    db.save();
+    res.status(201).json(newThread);
+  } catch (err) {
+    console.error('Thread submit error:', err);
+    res.status(500).json({ error: 'Server error creating thread.' });
+  }
+});
+
+router.get('/community/threads/:id/comments', async (req, res) => {
+  const threadId = req.params.id;
+  try {
+    const db = await getDb();
+    const comments = db.data.comments
+      .filter(c => c.discussion_id === threadId)
+      .sort((a, b) => new Date(a.date) - new Date(b.date));
+    res.json(comments);
+  } catch (err) {
+    console.error('Comments fetch error:', err);
+    res.status(500).json({ error: 'Server error fetching comments.' });
+  }
+});
+
+router.post('/community/threads/:id/comments', authMiddleware, async (req, res) => {
+  const threadId = req.params.id;
+  const { content } = req.body;
+  if (!content) {
+    return res.status(400).json({ error: 'Comment content is required.' });
+  }
+  try {
+    const db = await getDb();
+    const user = await db.get('SELECT * FROM users WHERE id = ?', [req.user.id]);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    const newComment = {
+      id: crypto.randomUUID(),
+      user_id: req.user.id,
+      username: user.name,
+      discussion_id: threadId,
+      content,
+      date: new Date().toISOString()
+    };
+
+    db.data.comments.push(newComment);
+    db.save();
+    res.status(201).json(newComment);
+  } catch (err) {
+    console.error('Comment submit error:', err);
+    res.status(500).json({ error: 'Server error posting comment.' });
+  }
+});
+
+router.delete('/community/threads/:id', authMiddleware, async (req, res) => {
+  const threadId = req.params.id;
+  try {
+    const db = await getDb();
+    const index = db.data.discussions.findIndex(d => d.id === threadId);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Thread not found.' });
+    }
+
+    const thread = db.data.discussions[index];
+    if (thread.user_id !== req.user.id && req.user.id !== 'default-student-id') {
+      return res.status(403).json({ error: 'Not authorized to delete this thread.' });
+    }
+
+    db.data.discussions.splice(index, 1);
+    db.data.comments = db.data.comments.filter(c => c.discussion_id !== threadId);
+    db.save();
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Thread delete error:', err);
+    res.status(500).json({ error: 'Server error deleting thread.' });
+  }
+});
+
 export default router;

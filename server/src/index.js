@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes
+app.use('/api', authRouter);
 app.use('/api/auth', authRouter);
 // Also mount /api/user since routes are inside authRouter
 app.use('/api/user', authRouter);

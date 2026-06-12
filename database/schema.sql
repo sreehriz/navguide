@@ -33,3 +33,61 @@ CREATE TABLE IF NOT EXISTS engineering_colleges (
     highest_package INT,
     rating DECIMAL(2,1)
 );
+
+CREATE TABLE IF NOT EXISTS bookmarks (
+    id TEXT PRIMARY KEY,
+    user_id TEXT,
+    college_id INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+    id TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    date TEXT NOT NULL,
+    read INTEGER DEFAULT 0,
+    type TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS notification_preferences (
+    user_id TEXT PRIMARY KEY,
+    exam_alerts INTEGER DEFAULT 1,
+    deadline_alerts INTEGER DEFAULT 1,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS reviews (
+    id TEXT PRIMARY KEY,
+    user_id TEXT,
+    username TEXT,
+    college_id INTEGER,
+    rating REAL,
+    comment TEXT,
+    date TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS discussions (
+    id TEXT PRIMARY KEY,
+    user_id TEXT,
+    username TEXT,
+    title TEXT,
+    content TEXT,
+    date TEXT,
+    category TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS comments (
+    id TEXT PRIMARY KEY,
+    user_id TEXT,
+    username TEXT,
+    discussion_id TEXT,
+    content TEXT,
+    date TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(discussion_id) REFERENCES discussions(id)
+);
+
