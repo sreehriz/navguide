@@ -253,7 +253,7 @@ router.put('/profile', authMiddleware, async (req, res) => {
 
 // @route   POST /api/ai/chat
 // @desc    Call AI Mentor (Gemini API with fallback to local rule-based system)
-router.post('/ai/chat', authMiddleware, async (req, res) => {
+router.post('/chat', authMiddleware, async (req, res) => {
   const { message } = req.body;
   
   if (!message) {
@@ -276,33 +276,41 @@ router.post('/ai/chat', authMiddleware, async (req, res) => {
         console.log('[AI] Calling Gemini API for message:', message);
         // Prompt construction
         const interestsString = userProfile.interests.join(', ');
-        const systemPrompt = `You are Nav, a premium AI educational mentor application helper for students.
-Your client profile:
+        const studentContext = `Student Profile:
 - Name: ${userProfile.name}
-- Academic Level: ${userProfile.academic.level}
-- Academic Stream: ${userProfile.academic.stream}
-- Academic Marks: ${userProfile.academic.marks}%
-- Main Interests: ${interestsString}
-- Career Goal: ${userProfile.careerGoal}
-- Budget cap: INR ${userProfile.preferences.budget}/year
-- Preferred College Type: ${userProfile.preferences.collegeType}
-- Preferred Location: ${userProfile.preferences.location}
+- Academic Level: ${userProfile.academic.level} (${userProfile.academic.stream}, ${userProfile.academic.marks}%)
+- Interests: ${interestsString}
+- Goal: ${userProfile.careerGoal}
+- Budget: INR ${userProfile.preferences.budget}/year
+- Location: ${userProfile.preferences.location} (${userProfile.preferences.collegeType})`;
 
-Provide high-quality, friendly, and context-aware guidance regarding studies, colleges, entrance exams, or career choices. Be motivational and clear. Keep response paragraphs short and engaging. Format critical terms in double asterisks **like this** for bold highlights.`;
+        const prompt = `As Nav, a friendly AI career mentor, please help this student. 
+Respond ONLY with your mentor message. Do NOT include your internal planning, thoughts, or step-by-step reasoning in the output.
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+${studentContext}
+
+Student says: "${message}"`;
+
+        let model = process.env.AI_MODEL || 'gemma-4-31b-it';
+        if (!model.startsWith('models/')) {
+          model = `models/${model}`;
+        }
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/${model}:generateContent?key=${apiKey}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            contents: [{ parts: [{ text: systemPrompt + '\n\nStudent: ' + message }] }]
+            contents: [{ parts: [{ text: prompt }] }]
           })
         });
 
         if (response.ok) {
           const data = await response.json();
-          if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-            const aiText = data.candidates[0].content.parts[0].text;
-            return res.json({ response: aiText });
+          const parts = data?.candidates?.[0]?.content?.parts || [];
+          // Find the first part that is NOT a thought
+          const responsePart = parts.find(p => !p.thought) || parts[parts.length - 1];
+          
+          if (responsePart?.text) {
+            return res.json({ response: responsePart.text });
           }
         }
         console.warn('[AI] Gemini API failed or returned unexpected payload, falling back to rule-based mentor response.');
