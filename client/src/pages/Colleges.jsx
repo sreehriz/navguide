@@ -476,11 +476,26 @@ export function Colleges() {
                       </button>
                     </div>
 
-                    <div>
-                      <h3 className="text-lg font-bold text-cream group-hover:text-mint transition-colors font-poppins">
-                        {college.college_name}
-                      </h3>
-                      <p className="text-xs text-cream/50 mt-0.5 font-inter">
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <h3 className="text-lg font-bold text-cream group-hover:text-mint transition-colors font-poppins">
+                          {college.college_name}
+                        </h3>
+                        <button
+                          onClick={() => {
+                            const url = college.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(college.college_name)}+official+website`;
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="text-cream/40 hover:text-mint transition-all p-1 cursor-pointer flex items-center justify-center rounded-lg hover:bg-white/5 relative group/link"
+                          title={college.official_website_url ? "Visit Official Website" : "Official website not available (Auto Search)"}
+                        >
+                          <span className="text-xs">🔗</span>
+                          <span className="absolute bottom-full mb-1 left-1/2 -translate-x-1/2 scale-0 group-hover/link:scale-100 bg-zinc-900 text-white text-[9px] py-1 px-2 rounded shadow-lg transition-all whitespace-nowrap z-50 pointer-events-none font-inter font-normal">
+                            {college.official_website_url ? "Visit Official Website" : "Official website not available (Auto Search)"}
+                          </span>
+                        </button>
+                      </div>
+                      <p className="text-xs text-cream/50 font-inter">
                         Top Program: <span className="text-sand font-semibold">{college.top_course}</span>
                       </p>
                     </div>
@@ -638,7 +653,19 @@ export function Colleges() {
                 return (
                   <div key={college.id} className="space-y-4 bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 relative">
                     <div className="flex items-start justify-between gap-1.5 min-h-[44px]">
-                      <h4 className="font-bold text-slate-800 line-clamp-2 leading-tight font-poppins text-xs pr-1">{college.college_name}</h4>
+                      <div className="flex items-center gap-1 flex-wrap pr-1">
+                        <h4 className="font-bold text-slate-800 line-clamp-2 leading-tight font-poppins text-xs">{college.college_name}</h4>
+                        <button
+                          onClick={() => {
+                            const url = college.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(college.college_name)}+official+website`;
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                          }}
+                          className="text-slate-400 hover:text-mint cursor-pointer text-[10px]"
+                          title={college.official_website_url ? "Visit Official Website" : "Official website not available (Auto Search)"}
+                        >
+                          <span>🔗</span>
+                        </button>
+                      </div>
                       <button
                         onClick={() => setComparedIds(comparedIds.filter(cid => cid !== college.id))}
                         className="text-slate-400 hover:text-rose-500 font-bold text-[10px] shrink-0 cursor-pointer pt-0.5"

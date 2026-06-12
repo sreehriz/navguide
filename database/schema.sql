@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS engineering_colleges (
     top_course VARCHAR(255),
     total_fees INT,
     highest_package INT,
-    rating DECIMAL(2,1)
+    rating DECIMAL(2,1),
+    official_website_url VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS bookmarks (

@@ -343,7 +343,19 @@ export function Dashboard() {
               ) : bookmarkedColleges.map(c => (
                 <div key={c.id} className="flex items-center space-x-3 p-3 bg-white/5 rounded-xl border border-white/5 hover:border-mint/20 transition-all text-left">
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-bold text-cream truncate font-poppins">{c.college_name}</p>
+                    <div className="flex items-center gap-1">
+                      <p className="text-xs font-bold text-cream truncate font-poppins">{c.college_name}</p>
+                      <button
+                        onClick={() => {
+                          const url = c.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(c.college_name)}+official+website`;
+                          window.open(url, '_blank', 'noopener,noreferrer');
+                        }}
+                        className="text-cream/40 hover:text-mint transition-all p-0.5 cursor-pointer flex items-center justify-center rounded-lg"
+                        title={c.official_website_url ? "Visit Official Website" : "Search Official Website"}
+                      >
+                        <span className="text-[10px]">🔗</span>
+                      </button>
+                    </div>
                     <p className="text-[10px] text-cream/40 truncate font-inter">{c.location} · {c.top_course}</p>
                   </div>
                   <button
@@ -420,7 +432,19 @@ export function Dashboard() {
                     #{idx + 1}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-bold text-cream truncate font-poppins">{c.college_name}</p>
+                    <div className="flex items-center gap-1">
+                      <p className="text-xs font-bold text-cream truncate font-poppins">{c.college_name}</p>
+                      <button
+                        onClick={() => {
+                          const url = c.official_website_url || `https://www.google.com/search?q=${encodeURIComponent(c.college_name)}+official+website`;
+                          window.open(url, '_blank', 'noopener,noreferrer');
+                        }}
+                        className="text-cream/40 hover:text-mint transition-all p-0.5 cursor-pointer flex items-center justify-center rounded-lg"
+                        title={c.official_website_url ? "Visit Official Website" : "Search Official Website"}
+                      >
+                        <span className="text-[10px]">🔗</span>
+                      </button>
+                    </div>
                     <p className="text-[10px] text-cream/40 truncate font-inter">{c.top_course} · ₹{(c.annual_fee/1000).toFixed(0)}k/yr</p>
                   </div>
                   <div className="flex items-center space-x-1 shrink-0">

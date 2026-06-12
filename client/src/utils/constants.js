@@ -8,7 +8,8 @@ export const COLLEGES = [
     top_course: 'BTech Computer Science',
     total_fees: 560000,
     highest_package: 5400000,
-    rating: 4.6
+    rating: 4.6,
+    official_website_url: 'https://www.nitk.ac.in'
   },
   {
     id: 2,
@@ -19,7 +20,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 1204400,
     highest_package: 4000000,
-    rating: 4.1
+    rating: 4.1,
+    official_website_url: 'https://sahyadri.edu.in'
   },
   {
     id: 3,
@@ -30,7 +32,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 976440,
     highest_package: 2750000,
-    rating: 4.0
+    rating: 4.0,
+    official_website_url: 'https://sjec.ac.in'
   },
   {
     id: 4,
@@ -41,7 +44,8 @@ export const COLLEGES = [
     top_course: 'BE Robotics and AI',
     total_fees: 1046000,
     highest_package: 5000000,
-    rating: 4.1
+    rating: 4.1,
+    official_website_url: 'https://mite.ac.in'
   },
   {
     id: 5,
@@ -52,7 +56,8 @@ export const COLLEGES = [
     top_course: 'BE Information Science',
     total_fees: 800000,
     highest_package: 2368000,
-    rating: 3.7
+    rating: 3.7,
+    official_website_url: 'https://canaraengineering.in'
   },
   {
     id: 6,
@@ -63,7 +68,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 764444,
     highest_package: 1200000,
-    rating: 3.9
+    rating: 3.9,
+    official_website_url: null
   },
   {
     id: 7,
@@ -74,7 +80,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 880000,
     highest_package: 2000000,
-    rating: 4.1
+    rating: 4.1,
+    official_website_url: 'https://aiet.org.in'
   },
   {
     id: 8,
@@ -85,7 +92,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 449640,
     highest_package: 1400000,
-    rating: 3.5
+    rating: 3.5,
+    official_website_url: 'https://ajiet.edu.in'
   },
   {
     id: 9,
@@ -96,7 +104,8 @@ export const COLLEGES = [
     top_course: 'BTech AIML',
     total_fees: 874500,
     highest_package: 1700000,
-    rating: 3.8
+    rating: 3.8,
+    official_website_url: 'https://srinivasuniversity.edu.in'
   },
   {
     id: 10,
@@ -107,7 +116,8 @@ export const COLLEGES = [
     top_course: 'BE AIML',
     total_fees: 449640,
     highest_package: 1000000,
-    rating: 3.8
+    rating: 3.8,
+    official_website_url: null
   },
   {
     id: 11,
@@ -118,7 +128,8 @@ export const COLLEGES = [
     top_course: 'BE Information Science',
     total_fees: 544000,
     highest_package: 1000000,
-    rating: 4.1
+    rating: 4.1,
+    official_website_url: 'https://yit.edu.in'
   },
   {
     id: 12,
@@ -129,7 +140,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 417360,
     highest_package: 725000,
-    rating: 3.8
+    rating: 3.8,
+    official_website_url: 'https://pace.edu.in'
   },
   {
     id: 13,
@@ -140,7 +152,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 800000,
     highest_package: 600000,
-    rating: 3.9
+    rating: 3.9,
+    official_website_url: 'https://bitmangalore.edu.in'
   },
   {
     id: 14,
@@ -151,7 +164,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 800000,
     highest_package: 506000,
-    rating: 3.7
+    rating: 3.7,
+    official_website_url: 'https://sdc.edu.in'
   },
   {
     id: 15,
@@ -162,7 +176,8 @@ export const COLLEGES = [
     top_course: 'BE Artificial Intelligence',
     total_fees: 417060,
     highest_package: 300000,
-    rating: 3.7
+    rating: 3.7,
+    official_website_url: 'http://karavaliengineering.ac.in'
   },
   {
     id: 16,
@@ -173,7 +188,8 @@ export const COLLEGES = [
     top_course: 'BTech AIML',
     total_fees: 926000,
     highest_package: 900000,
-    rating: 3.9
+    rating: 3.9,
+    official_website_url: 'https://yenepoya.edu.in'
   },
   {
     id: 17,
@@ -184,7 +200,8 @@ export const COLLEGES = [
     top_course: 'BTech Computer Science',
     total_fees: 1440000,
     highest_package: 5893000,
-    rating: 4.0
+    rating: 4.0,
+    official_website_url: 'https://nmit.ac.in'
   },
   {
     id: 18,
@@ -195,7 +212,8 @@ export const COLLEGES = [
     top_course: 'BTech Computer Science',
     total_fees: 1280000,
     highest_package: 5200000,
-    rating: 4.3
+    rating: 4.3,
+    official_website_url: 'https://nmamit.nitte.edu.in'
   },
   {
     id: 19,
@@ -206,7 +224,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 500000,
     highest_package: 700000,
-    rating: 3.6
+    rating: 3.6,
+    official_website_url: 'https://sitmng.ac.in'
   },
   {
     id: 20,
@@ -217,7 +236,8 @@ export const COLLEGES = [
     top_course: 'Marine Engineering',
     total_fees: 600000,
     highest_package: 900000,
-    rating: 3.5
+    rating: 3.5,
+    official_website_url: 'http://mmct.edu.in'
   },
   {
     id: 21,
@@ -228,7 +248,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 700000,
     highest_package: 1200000,
-    rating: 4.0
+    rating: 4.0,
+    official_website_url: 'https://vcetputtur.ac.in'
   },
   {
     id: 22,
@@ -239,7 +260,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 600000,
     highest_package: 800000,
-    rating: 3.6
+    rating: 3.6,
+    official_website_url: 'https://kvgengg.com'
   },
   {
     id: 23,
@@ -250,7 +272,8 @@ export const COLLEGES = [
     top_course: 'BE Information Science',
     total_fees: 650000,
     highest_package: 500000,
-    rating: 3.5
+    rating: 3.5,
+    official_website_url: 'https://sdc.edu.in'
   },
   {
     id: 24,
@@ -261,7 +284,8 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 700000,
     highest_package: 600000,
-    rating: 3.5
+    rating: 3.5,
+    official_website_url: 'https://canaracollege.com'
   },
   {
     id: 25,
@@ -272,7 +296,8 @@ export const COLLEGES = [
     top_course: 'BTech AIML',
     total_fees: 950000,
     highest_package: 1000000,
-    rating: 3.8
+    rating: 3.8,
+    official_website_url: 'https://quad.ai'
   },
   {
     id: 26,
@@ -283,6 +308,7 @@ export const COLLEGES = [
     top_course: 'BE Computer Science',
     total_fees: 550000,
     highest_package: 700000,
-    rating: 3.6
+    rating: 3.6,
+    official_website_url: 'https://srinivasgroup.com'
   }
 ]

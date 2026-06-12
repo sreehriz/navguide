@@ -176,7 +176,7 @@ export async function initDb() {
           }
           values.push(current.trim().replace(/^'|'$/g, '').replace(/''/g, "'"));
           
-          const [id, name, loc, type, naac, course, fees, pkg, rating] = values;
+          const [id, name, loc, type, naac, course, fees, pkg, rating, url] = values;
           mockDb.data.engineering_colleges.push({
             id: parseInt(id),
             college_name: name,
@@ -186,7 +186,8 @@ export async function initDb() {
             top_course: course,
             total_fees: parseInt(fees),
             highest_package: parseInt(pkg),
-            rating: parseFloat(rating)
+            rating: parseFloat(rating),
+            official_website_url: url === 'NULL' || !url ? null : url
           });
         }
       }
