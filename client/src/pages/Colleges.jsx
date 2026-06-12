@@ -637,15 +637,14 @@ export function Colleges() {
 
                 return (
                   <div key={college.id} className="space-y-4 bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 relative">
-                    <button
-                      onClick={() => setComparedIds(comparedIds.filter(cid => cid !== college.id))}
-                      className="absolute top-2 right-2 text-slate-400 hover:text-rose-500 font-bold text-[10px]"
-                    >
-                      Remove
-                    </button>
-                    
-                    <div className="h-10 flex flex-col justify-end">
-                      <h4 className="font-bold text-slate-800 line-clamp-2 leading-tight font-poppins">{college.college_name}</h4>
+                    <div className="flex items-start justify-between gap-1.5 min-h-[44px]">
+                      <h4 className="font-bold text-slate-800 line-clamp-2 leading-tight font-poppins text-xs pr-1">{college.college_name}</h4>
+                      <button
+                        onClick={() => setComparedIds(comparedIds.filter(cid => cid !== college.id))}
+                        className="text-slate-400 hover:text-rose-500 font-bold text-[10px] shrink-0 cursor-pointer pt-0.5"
+                      >
+                        Remove
+                      </button>
                     </div>
 
                     <div className="font-inter text-slate-600">{college.college_type}</div>
