@@ -35,8 +35,8 @@ export function Sidebar() {
               style={{ background: 'rgba(139,223,221,0.20)', border: '1px solid rgba(139,223,221,0.40)' }}>
               <Sparkles size={15} style={{ color: 'var(--c-teal-dk)' }} />
             </div>
-            <span className="font-800 text-lg tracking-tight text-gray-900" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Nav<span className="font-cursive text-xl font-bold text-[var(--c-orange)]">Guide</span>
+            <span className="font-800 text-lg tracking-tight text-gray-900">
+              Nav<span className="text-xl font-bold text-[var(--c-orange)]">Guide</span>
             </span>
           </NavLink>
           

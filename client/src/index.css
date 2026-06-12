@@ -1,13 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Playball&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
-
-@font-face {
-  font-family: 'Parceh';
-  src: url('/Parceh.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  unicode-range: U+0041-005A, U+0061-007A;
-}
 
 /* ─── Design Tokens ──────────────────────────────────────────────────── */
 :root {
@@ -42,17 +34,48 @@
   body {
     background-color: var(--c-bg);
     color: var(--c-text);
-    font-family: 'Parceh', 'Times New Roman', Times, Georgia, serif;
-    font-size: 18px;
-    line-height: 1.8;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
     overflow-x: hidden;
   }
 
   h1,h2,h3,h4,h5,h6 {
-    font-family: 'Parceh', 'Times New Roman', Times, Georgia, serif;
+    font-family: 'Poppins', sans-serif;
     color: var(--c-text-2);
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+  }
+
+  h1 {
+    font-size: 44px;
     font-weight: 700;
-    line-height: 1.35;
+  }
+
+  h2 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  h5 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  h6 {
+    font-size: 14px;
+    font-weight: 600;
   }
 
   a { color: inherit; text-decoration: none; }
@@ -65,11 +88,22 @@
   ::-webkit-scrollbar-thumb:hover { background: var(--c-teal); }
 
   .font-cursive, .font-italic {
-    font-family: 'Parceh', 'Times New Roman', Times, Georgia, serif !important;
     font-style: italic !important;
   }
-  .font-serif {
-    font-family: 'Parceh', 'Times New Roman', Times, Georgia, serif !important;
+
+  @media (max-width: 768px) {
+    body {
+      font-size: 15px;
+    }
+    h1 {
+      font-size: 34px;
+    }
+    h2 {
+      font-size: 26px;
+    }
+    h3 {
+      font-size: 20px;
+    }
   }
 }
 

@@ -18,8 +18,8 @@ export function Home() {
             <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-teal-100/40 border border-teal-200">
               <Sparkles size={15} style={{ color: 'var(--c-teal-dk)' }} />
             </div>
-            <span className="font-800 text-lg tracking-tight text-gray-900" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Nav<span className="font-cursive text-xl font-bold text-[var(--c-orange)]">Guide</span>
+            <span className="font-800 text-lg tracking-tight text-gray-900">
+              Nav<span className="text-xl font-bold text-[var(--c-orange)]">Guide</span>
             </span>
           </Link>
           
@@ -55,14 +55,14 @@ export function Home() {
             <span>Next-Generation AI Learning Companion</span>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-tight">
             Empower Your Future with{' '}
-            <span className="font-cursive text-[var(--c-orange)] block sm:inline text-5xl sm:text-6xl">
+            <span className="text-[var(--c-orange)] block sm:inline text-5xl sm:text-6xl">
               Nav AI Mentor
             </span>
           </h1>
           
-          <p className="text-base md:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-serif">
+          <p className="text-base md:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
             NavGuide combines machine learning with checklist engines to dynamically rank colleges, identify exam eligibilities, map career tracks, and guide your daily study routines.
           </p>
 
@@ -112,11 +112,11 @@ export function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-widest text-[var(--c-orange-dk)] font-serif">Comprehensive Guidance Toolkit</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-gray-900" style={{ fontFamily: 'Playfair Display, serif' }}>
-              What We <span className="font-cursive text-[var(--c-teal-dk)] text-4xl">Provide</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-[var(--c-orange-dk)]">Comprehensive Guidance Toolkit</span>
+            <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
+              What We <span className="text-[var(--c-teal-dk)] text-4xl">Provide</span>
             </h2>
-            <p className="text-sm text-gray-500 font-serif">
+            <p className="text-sm text-gray-500">
               Navigate college applications and subject criteria smoothly with modular student tools designed to make planning simple.
             </p>
           </div>
@@ -129,8 +129,8 @@ export function Home() {
                 <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600">
                   <GraduationCap size={20} />
                 </div>
-                <h3 className="text-base font-bold text-gray-900 font-serif">College & Cutoff Matching</h3>
-                <p className="text-xs text-gray-500 leading-relaxed font-serif">
+                <h3 className="text-base font-bold text-gray-900">College & Cutoff Matching</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
                   Input your board examination scores to receive eligibility scoring matching cutoff values for top institutions.
                 </p>
               </div>
@@ -145,8 +145,8 @@ export function Home() {
                 <div className="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600">
                   <Target size={20} />
                 </div>
-                <h3 className="text-base font-bold text-gray-900 font-serif">Smart Action Checklists</h3>
-                <p className="text-xs text-gray-500 leading-relaxed font-serif">
+                <h3 className="text-base font-bold text-gray-900">Smart Action Checklists</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
                   A dynamic task scheduling engine that highlights the single highest value next action based on your target deadlines.
                 </p>
               </div>
@@ -161,8 +161,8 @@ export function Home() {
                 <div className="w-10 h-10 rounded-xl bg-yellow-100 flex items-center justify-center text-yellow-600">
                   <GitCompare size={20} />
                 </div>
-                <h3 className="text-base font-bold text-gray-900 font-serif">Multi-Factor Decisions</h3>
-                <p className="text-xs text-gray-500 leading-relaxed font-serif">
+                <h3 className="text-base font-bold text-gray-900">Multi-Factor Decisions</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
                   Compare career directions. Input interest, salary estimates, job stability and skill hurdles to generate objective visual scores.
                 </p>
               </div>
@@ -177,8 +177,8 @@ export function Home() {
                 <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600">
                   <MessageSquare size={20} />
                 </div>
-                <h3 className="text-base font-bold text-gray-900 font-serif">Nav AI Context Mentor</h3>
-                <p className="text-xs text-gray-500 leading-relaxed font-serif">
+                <h3 className="text-base font-bold text-gray-900">Nav AI Context Mentor</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
                   An always-ready conversation helper reading your marks, interests, and budget limits to advise you on next-step options.
                 </p>
               </div>
@@ -192,8 +192,8 @@ export function Home() {
           {/* Quick FAQ / Detail banner */}
           <div className="mt-16 bg-white/60 rounded-2xl border border-[var(--c-border)] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-center md:text-left">
-              <h4 className="text-lg font-bold text-gray-900 font-serif">Ready to organize your path?</h4>
-              <p className="text-xs text-gray-500 leading-relaxed font-serif">It takes less than three minutes to establish your onboarding profile details.</p>
+              <h4 className="text-lg font-bold text-gray-900">Ready to organize your path?</h4>
+              <p className="text-xs text-gray-500 leading-relaxed">It takes less than three minutes to establish your onboarding profile details.</p>
             </div>
             <Link to={isAuthenticated ? "/dashboard" : "/signup"} className="btn-primary py-2.5 px-5 text-xs font-700 shrink-0">
               Start Free Setup Now
